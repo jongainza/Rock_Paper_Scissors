@@ -52,10 +52,8 @@ function handleSelection(e){
   else if (e.target.classList.contains('scissors'))humanChoice='scissors';
   else if (e.target.classList.contains('paper'))humanChoice='paper'
 
-if (humanScore + computerScore < 5 ) {
-  console.log(`HS + CS = ${humanScore + computerScore}`);
   playRound(humanChoice, getComputerChoice());
-}
+
 }
 
 
@@ -64,7 +62,7 @@ if (humanScore + computerScore < 5 ) {
 
 function getScore() {
   scoreP.textContent=(`Player=${humanScore} - Computer=${computerScore}`);
-  if (humanScore + computerScore >= 5 || humanScore === 3 || computerScore === 3){
+  if (humanScore === 5 ||  computerScore === 5){
     declareWinner();
   }
 }
@@ -131,6 +129,10 @@ function declareWinner() {
   }
   scoreP.textContent=''
   pickP.textContent=''
+    humanScore = 0;
+    computerScore = 0;
+
+
 }
 
 
