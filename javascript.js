@@ -1,3 +1,28 @@
+let options = document.querySelector('.options')
+let resultsP=document.querySelector('.results>p')
+let scoreP=document.querySelector('.score>p')
+let pickP=document.querySelector('.pick>p')
+let resetBtn = document.querySelector(".btn-reset");
+
+let humanChoice
+let humanScore = 0;
+let computerScore = 0;
+
+options.addEventListener('click',handleSelection)
+resetBtn.addEventListener('click',()=>{
+  humanScore=0;
+  computerScore=0;
+  resultsP.textContent='';
+  scoreP.textContent='';
+  pickP.textContent='Game reseted'
+  setTimeout(() => {
+    pickP.textContent = "";
+  }, 1000);
+}
+  
+)
+
+
 // computer choice
 
 function getComputerChoice() {
@@ -15,15 +40,9 @@ function getComputerChoice() {
   }
 }
 
+
+
 // human choice
-
-let options = document.querySelector('.options')
-let resultsP=document.querySelector('.results>p')
-let scoreP=document.querySelector('.score>p')
-let pickP=document.querySelector('.pick>p')
-let resetBtn = document.querySelector('reset-btn')
-let humanChoice
-
 function handleSelection(e){
   if (e.target.classList.contains('rock')) {
     humanChoice='rock';
@@ -39,16 +58,13 @@ if (humanScore + computerScore < 5 ) {
 }
 }
 
-options.addEventListener('click',handleSelection)
 
 
 
-let humanScore = 0;
-let computerScore = 0;
 
 function getScore() {
   scoreP.textContent=(`Player=${humanScore} - Computer=${computerScore}`);
-  if (humanScore + computerScore >= 5){
+  if (humanScore + computerScore >= 5 || humanScore === 3 || computerScore === 3){
     declareWinner();
   }
 }
@@ -113,6 +129,8 @@ function declareWinner() {
     resultsP.textContent=(`Computer wins ${computerScore} to ${humanScore}`);
     console.log(`Player wins ${computerScore} to ${humanScore}`);
   }
+  scoreP.textContent=''
+  pickP.textContent=''
 }
 
 
