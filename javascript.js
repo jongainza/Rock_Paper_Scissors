@@ -1,3 +1,5 @@
+// computer choice
+
 function getComputerChoice() {
   let computerChoice = Math.floor(Math.random() * 3) + 1;
   switch (computerChoice) {
@@ -13,89 +15,104 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let humanChoice = prompt("Rock, Paper or Scissors?", "");
-  if (
-    humanChoice.toLocaleLowerCase() !== "rock" &&
-    humanChoice.toLowerCase() !== "paper" &&
-    humanChoice.toLocaleLowerCase() !== "scissors"
-  ) {
-    alert("WRONG INPUT!");
-  }
-  console.log(humanChoice.toLowerCase());
+// human choice
 
-  return humanChoice.toLowerCase();
+let options = document.querySelector('.options')
+let resultsP=document.querySelector('.results>p')
+let scoreP=document.querySelector('.score>p')
+let pickP=document.querySelector('.pick>p')
+let resetBtn = document.querySelector('reset-btn')
+let humanChoice
+
+function handleSelection(e){
+  if (e.target.classList.contains('rock')) {
+    humanChoice='rock';
+    console.log(humanChoice);
+  }
+    
+  else if (e.target.classList.contains('scissors'))humanChoice='scissors';
+  else if (e.target.classList.contains('paper'))humanChoice='paper'
+
+if (humanScore + computerScore < 5 ) {
+  console.log(`HS + CS = ${humanScore + computerScore}`);
+  playRound(humanChoice, getComputerChoice());
 }
+}
+
+options.addEventListener('click',handleSelection)
+
+
 
 let humanScore = 0;
 let computerScore = 0;
 
 function getScore() {
-  console.log(`Player=${humanScore} - Computer=${computerScore}`);
+  scoreP.textContent=(`Player=${humanScore} - Computer=${computerScore}`);
+  if (humanScore + computerScore >= 5){
+    declareWinner();
+  }
 }
 
 function playRound(humanChoice, computerChoice) {
+  
   if (humanChoice === "rock" && computerChoice === "rock") {
-    alert("Both players choose Rock");
+    pickP.textContent=("Both players choose Rock");
     getScore();
     return;
   } else if (humanChoice === "rock" && computerChoice === "paper") {
-    alert(
-      "Player choose Rock and Computer choose Paper therefor Computer wins",
+    pickP.textContent=(
+      "Player choose Rock and Computer choose Paper therefor Computer wins"
     );
     computerScore++;
     getScore();
     return;
   } else if (humanChoice === "rock" && computerChoice === "scissors") {
-    alert(
-      "Player choose Rock and Computer choose Scissors therefor Player wins",
+    pickP.textContent=(
+      "Player choose Rock and Computer choose Scissors therefor Player wins"
     );
     humanScore++;
     getScore();
     return;
   } else if (humanChoice === "paper" && computerChoice === "rock") {
-    alert("Player choose Paper and Computer choose Rock therefor Player wins");
+    pickP.textContent=("Player choose Paper and Computer choose Rock therefor Player wins");
     humanScore++;
     getScore();
     return;
   } else if (humanChoice === "paper" && computerChoice === "paper") {
-    alert("Both players choose Paper");
+    pickP.textContent="Both players choose Paper";
     getScore();
     return;
   } else if (humanChoice === "paper" && computerChoice === "scissors") {
-    alert(
-      "Player choose Paper and Computer choose Scissors therefor Computer wins",
+    pickP.textContent=(
+      "Player choose Paper and Computer choose Scissors therefor Computer wins"
     );
     computerScore++;
     getScore();
     return;
   } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    alert("Player Scissors and Computer choose Rock therefor Computer wins");
+    pickP.textContent=("Player Scissors and Computer choose Rock therefor Computer wins");
     computerScore++;
     getScore();
     return;
   } else if (humanChoice === "scissors" && computerChoice === "paper") {
-    alert("Player Scissors and Computer choose Paper therefor Player wins");
+    pickP.textContent=("Player Scissors and Computer choose Paper therefor Player wins");
     humanScore++;
     getScore();
     return;
   } else if (humanChoice === "scissors" && computerChoice === "scissors") {
-    alert("Both players choose Scissors");
+    pickP.textContent=("Both players choose Scissors");
     getScore();
     return;
   }
 }
 function declareWinner() {
   if (humanScore > computerScore) {
-    alert(`Player wins ${humanScore} to ${computerScore}`);
+    resultsP.textContent=(`Player wins ${humanScore} to ${computerScore}`);
     console.log(`Player wins ${humanScore} to ${computerScore}`);
   } else {
-    alert(`Computer wins ${computerScore} to ${humanScore}`);
+    resultsP.textContent=(`Computer wins ${computerScore} to ${humanScore}`);
     console.log(`Player wins ${computerScore} to ${humanScore}`);
   }
 }
-while (humanScore + computerScore < 5) {
-  console.log(`HS + CS = ${humanScore + computerScore}`);
-  playRound(getHumanChoice(), getComputerChoice());
-}
-declareWinner();
+
+
