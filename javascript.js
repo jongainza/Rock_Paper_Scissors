@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 function getComputerChoice(){
 
@@ -239,4 +239,4 @@ function declareWinner() {
 }
 
 
->>>>>>> rps-ui
+
